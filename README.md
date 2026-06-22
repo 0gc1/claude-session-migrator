@@ -4,6 +4,8 @@ Save & restore everything inside the **Code tab** of the Claude Desktop App on W
 
 By Xaviq.
 
+![Claude Backup GUI](screenshots/01-gui.png)
+
 ---
 
 ## Scope — read this first
@@ -25,6 +27,12 @@ If your sessions live in the cloud (the normal **Chat** tab), you don't need thi
 
 The Code tab stores everything locally in an MSIX-virtualised sandbox under `%LOCALAPPDATA%\Packages\Claude_*\`. A naive folder copy doesn't survive a PC swap: the encryption key inside `Local State` is bound to the Windows machine via DPAPI. **Claude Backup** unwraps the key on the old PC, ships it inside the backup zip, then re-wraps it for the new PC. After restore the Code sidebar looks identical — same pinned workspaces, same group names ("Angeheftet", "maxim work hier", custom groups), same Code sessions with full project memory and sub-agent state.
 
+| Before backup (old PC) | After restore (new PC) |
+|---|---|
+| ![Sidebar before](screenshots/03-sidebar-before.png) | ![Sidebar after](screenshots/03-sidebar-after.png) |
+
+Identical sidebar, identical pins, identical groups — same chat content, same project memory inside.
+
 ## Features
 
 - 1:1 migration of every Code session, pin, group label, project memory, sub-agent state
@@ -40,6 +48,9 @@ The Code tab stores everything locally in an MSIX-virtualised sandbox under `%LO
 
 1. Download `ClaudeBackup.exe` from the [Releases](https://github.com/0gc1/claude-session-migrator/releases/latest) page.
 2. On the **old PC**: open `ClaudeBackup.exe`, pick a backup zip path, click **Save**.
+
+   ![Save in progress](screenshots/02-save-progress.png)
+
 3. Transfer the zip to the **new PC** (USB, OneDrive, anywhere).
 4. On the **new PC**: install Claude Desktop, **log in once**, **quit** the app.
 5. Open `ClaudeBackup.exe` on the new PC, point it at the zip, click **Restore**.
