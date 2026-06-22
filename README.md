@@ -38,7 +38,7 @@ The Code tab stores everything locally in an MSIX-virtualised sandbox under `%LO
 
 ## Quick start
 
-1. Download `ClaudeBackup.exe` from the [Releases](../../releases) page.
+1. Download `ClaudeBackup.exe` from the [Releases](https://github.com/0gc1/claude-session-migrator/releases/latest) page.
 2. On the **old PC**: open `ClaudeBackup.exe`, pick a backup zip path, click **Save**.
 3. Transfer the zip to the **new PC** (USB, OneDrive, anywhere).
 4. On the **new PC**: install Claude Desktop, **log in once**, **quit** the app.
@@ -76,6 +76,7 @@ Chrome's `app_bound_encrypted_key` (v20) is kept from the new PC's fresh state �
 
 - Windows 10 (build 1607+) or Windows 11
 - Claude Desktop App installed + logged in once on the **target** PC before restore
+- **Internet connection on startup** — Claude Backup checks `raw.githubusercontent.com` for the latest version manifest every launch. Without internet, or while running an outdated build, the tool refuses to start and points you to the [Releases](https://github.com/0gc1/claude-session-migrator/releases/latest) page. This is intentional: re-encryption logic is sensitive and outdated copies could break your data. Allow the EXE through your firewall if it gets blocked.
 
 ## CLI
 
@@ -91,6 +92,9 @@ ClaudeBackup.exe --include-vm --save backup.zip    # include vm_bundles (huge)
 No args → GUI opens.
 
 ## Troubleshooting
+
+**"Internet required" or "update required" on launch.**
+The tool checks `raw.githubusercontent.com/0gc1/claude-session-migrator/main/version.json` every startup and refuses to run without a successful match. Connect to the internet and / or download the [latest release](https://github.com/0gc1/claude-session-migrator/releases/latest). Allow the EXE through your firewall if it's blocked.
 
 **Sidebar empty after restore.**
 Original folders are at `*.bak.<timestamp>` next to where they used to live — move them back to undo. Make sure the Windows username you're restoring under matches the username that produced the backup (DPAPI binds to user + machine).
