@@ -27,11 +27,11 @@ If your sessions live in the cloud (the normal **Chat** tab), you don't need thi
 
 The Code tab stores everything locally in an MSIX-virtualised sandbox under `%LOCALAPPDATA%\Packages\Claude_*\`. A naive folder copy doesn't survive a PC swap: the encryption key inside `Local State` is bound to the Windows machine via DPAPI. **Claude Backup** unwraps the key on the old PC, ships it inside the backup zip, then re-wraps it for the new PC. After restore the Code sidebar looks identical — same pinned workspaces, same group names ("Angeheftet", "maxim work hier", custom groups), same Code sessions with full project memory and sub-agent state.
 
-| Before backup (old PC) | After restore (new PC) |
+| New PC — fresh install, empty | Same PC — right after restore |
 |---|---|
-| ![Sidebar before](screenshots/03-sidebar-before.png) | ![Sidebar after](screenshots/03-sidebar-after.png) |
+| ![Sidebar before restore](screenshots/03-sidebar-before.png) | ![Sidebar after restore](screenshots/03-sidebar-after.png) |
 
-Identical sidebar, identical pins, identical groups — same chat content, same project memory inside.
+Same PC, before and after running `Restore`. Pinned workspaces, custom groups, chat history, and project memory are back exactly as they were on the old machine.
 
 ## Features
 
