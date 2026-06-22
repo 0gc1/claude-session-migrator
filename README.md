@@ -8,6 +8,19 @@ By Xaviq.
 
 ---
 
+## ⚠ Required setup — read before you do anything
+
+| Requirement | Why |
+|---|---|
+| **Same Claude account on both PCs.** Sign in with the **exact same e-mail** on the old and new machine. | The Code-tab sessions reference your account ID internally. A different account on the new PC means the restored data is orphaned and the sidebar stays empty even with a perfect restore. |
+| **Internet on BOTH PCs.** Old PC needs internet during Save. New PC needs internet during Restore — Claude Desktop must be installed and logged in once before Restore runs. | The tool fetches `version.json` from GitHub at every launch and refuses to start without it. Claude Desktop itself also needs the network for login. |
+
+If either condition is wrong, nothing else here matters — set them straight first.
+
+---
+
+---
+
 ## Scope — read this first
 
 This tool is **only** for the **Code tab** of the **Claude Desktop App on Windows**.
@@ -49,14 +62,16 @@ Same PC, before and after running `Restore`. Pinned workspaces, custom groups, c
 ## Quick start
 
 1. Download `ClaudeBackup.exe` from the [Releases](https://github.com/0gc1/claude-session-migrator/releases/latest) page.
-2. On the **old PC**: open `ClaudeBackup.exe`, pick a backup zip path, click **Save**.
+2. On the **old PC** (where you are already logged into Claude with the account you want to migrate): open `ClaudeBackup.exe`, pick a backup zip path, click **Save**.
 
    ![Save in progress](screenshots/02-save-progress.png)
 
 3. Transfer the zip to the **new PC** (USB, OneDrive, anywhere).
-4. On the **new PC**: install Claude Desktop, **log in once**, **quit** the app.
+4. On the **new PC**: install Claude Desktop, **log in with the SAME account** you used on the old PC, **quit** the app.
 5. Open `ClaudeBackup.exe` on the new PC, point it at the zip, click **Restore**.
 6. Launch Claude Desktop, open the **Code tab**. Sidebar, pins, groups, Code sessions — identical to the old PC. The normal **Chat tab** also already shows your conversations (those come from Anthropic's servers via your login).
+
+> **If you log in with a different account on the new PC, the restore will appear to succeed but the sidebar will stay empty — Code-tab data is tied to the account ID, not just the machine.**
 
 ## What's in the backup
 
@@ -110,7 +125,7 @@ No args → GUI opens.
 The tool checks `raw.githubusercontent.com/0gc1/claude-session-migrator/main/version.json` every startup and refuses to run without a successful match. Connect to the internet and / or download the [latest release](https://github.com/0gc1/claude-session-migrator/releases/latest). Allow the EXE through your firewall if it's blocked.
 
 **Sidebar empty after restore.**
-Original folders are at `*.bak.<timestamp>` next to where they used to live — move them back to undo. Make sure the Windows username you're restoring under matches the username that produced the backup (DPAPI binds to user + machine).
+The number-one cause is logging into Claude Desktop on the new PC with a **different account** than the one used on the old PC. Code-tab sessions are tied to the account, not just the machine. Sign out of Claude Desktop on the new PC, sign in with the same account, quit, then re-run Restore. Original folders are at `*.bak.<timestamp>` next to where they used to live — move them back to undo.
 
 **"Local State does not exist on this PC".**
 Install Claude Desktop, run it once, log in, quit. Then re-run Restore. The tool needs a fresh Local State to re-key against.
