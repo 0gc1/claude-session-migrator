@@ -33,6 +33,8 @@ The Code tab stores everything locally in an MSIX-virtualised sandbox under `%LO
 
 Same PC, before and after running `Restore`. Pinned workspaces, custom groups, chat history, and project memory are back exactly as they were on the old machine.
 
+> The white block in the right-hand screenshot redacts a personal chat message — the tool does not blur or modify anything; that's just for the README.
+
 ## Features
 
 - 1:1 migration of every Code session, pin, group label, project memory, sub-agent state
